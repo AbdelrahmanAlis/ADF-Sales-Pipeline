@@ -3,33 +3,89 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata1",
-				"type": "GetMetadata",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "src_data",
-						"type": "DatasetReference",
-						"parameters": {
-							"folderPath": "src-erp"
+					"items": {
+						"value": "@createArray(\n  json('{\"source\":\"src-erp\",\"sink\":\"erp\"}'),\n  json('{\"source\":\"src-crm\",\"sink\":\"crm\"}')\n)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "GetFiles",
+							"type": "GetMetadata",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "src_files",
+									"type": "DatasetReference",
+									"parameters": {
+										"folderPath": {
+											"value": "@item().source",
+											"type": "Expression"
+										}
+									}
+								},
+								"fieldList": [
+									"childItems"
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "GetFiles",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "copyFiles",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"ٍSourceFolderPath": {
+										"value": "@item().source",
+										"type": "Expression"
+									},
+									"SinkFolderPath": {
+										"value": "@item().sink",
+										"type": "Expression"
+									},
+									"fileList": {
+										"value": "@activity('GetFiles').output.childItems",
+										"type": "Expression"
+									}
+								}
+							}
 						}
-					},
-					"fieldList": [],
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"enablePartitionDiscovery": false
-					},
-					"formatSettings": {
-						"type": "DelimitedTextReadSettings"
-					}
+					]
 				}
 			}
 		],
