@@ -277,7 +277,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"folderPath": {
-													"value": "@pipeline().parameters.ٍSourceFolderPath",
+													"value": "@pipeline().parameters.SourceFolderPath",
 													"type": "Expression"
 												},
 												"fileName": {
@@ -312,7 +312,7 @@
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"ٍSourceFolderPath": {
+					"SourceFolderPath": {
 						"type": "string"
 					},
 					"SinkFolderPath": {
@@ -404,10 +404,6 @@
 										},
 										"waitOnCompletion": true,
 										"parameters": {
-											"ٍSourceFolderPath": {
-												"value": "@item().source",
-												"type": "Expression"
-											},
 											"SinkFolderPath": {
 												"value": "@item().sink",
 												"type": "Expression"
