@@ -64,7 +64,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"folderPath": {
-											"value": "@pipeline().parameters.ٍSourceFolderPath",
+											"value": "@pipeline().parameters.SourceFolderPath",
 											"type": "Expression"
 										},
 										"fileName": {
@@ -96,7 +96,7 @@
 			}
 		],
 		"parameters": {
-			"ٍSourceFolderPath": {
+			"SourceFolderPath": {
 				"type": "string"
 			},
 			"SinkFolderPath": {

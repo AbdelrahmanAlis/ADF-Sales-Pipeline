@@ -41,6 +41,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -70,10 +71,6 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
-									"ٍSourceFolderPath": {
-										"value": "@item().source",
-										"type": "Expression"
-									},
 									"SinkFolderPath": {
 										"value": "@item().sink",
 										"type": "Expression"
