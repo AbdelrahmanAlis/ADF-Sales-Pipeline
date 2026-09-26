@@ -1,0 +1,60 @@
+{
+	"name": "src_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folderPath": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().folderPath",
+					"type": "Expression"
+				},
+				"container": "src-sys"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "cst_id",
+				"type": "String"
+			},
+			{
+				"name": "cst_key",
+				"type": "String"
+			},
+			{
+				"name": "cst_firstname",
+				"type": "String"
+			},
+			{
+				"name": "cst_lastname",
+				"type": "String"
+			},
+			{
+				"name": "cst_marital_status",
+				"type": "String"
+			},
+			{
+				"name": "cst_gndr",
+				"type": "String"
+			},
+			{
+				"name": "cst_create_date",
+				"type": "String"
+			}
+		]
+	}
+}
