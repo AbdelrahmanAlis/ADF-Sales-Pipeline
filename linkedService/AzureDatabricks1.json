@@ -9,6 +9,9 @@
 			"workspaceResourceId": "/subscriptions/97af60b5-c44f-4774-afbe-059facbe5375/resourceGroups/salesx/providers/Microsoft.Databricks/workspaces/sales-pipeline",
 			"newClusterNodeType": "Standard_DS3_v2",
 			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
 			"newClusterVersion": "13.3.x-scala2.12",
 			"clusterOption": "Fixed",
 			"newClusterInitScripts": []
