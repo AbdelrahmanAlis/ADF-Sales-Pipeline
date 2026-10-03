@@ -12,6 +12,8 @@
 						"value": "@createArray(\n  json('{\"source\":\"src-erp\",\"sink\":\"erp\"}'),\n  json('{\"source\":\"src-crm\",\"sink\":\"crm\"}')\n)",
 						"type": "Expression"
 					},
+					"isSequential": false,
+					"batchCount": 3,
 					"activities": [
 						{
 							"name": "GetFiles",
@@ -71,6 +73,10 @@
 								},
 								"waitOnCompletion": true,
 								"parameters": {
+									"SourceFolderPath": {
+										"value": "@item().source",
+										"type": "Expression"
+									},
 									"SinkFolderPath": {
 										"value": "@item().sink",
 										"type": "Expression"

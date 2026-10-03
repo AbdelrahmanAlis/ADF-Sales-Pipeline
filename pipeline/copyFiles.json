@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.fileList",
 						"type": "Expression"
 					},
+					"batchCount": 3,
 					"activities": [
 						{
 							"name": "Copy data1",
@@ -76,7 +77,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "sik_data",
+									"referenceName": "sink_files",
 									"type": "DatasetReference",
 									"parameters": {
 										"folderPath": {
@@ -84,12 +85,31 @@
 											"type": "Expression"
 										},
 										"fileName": {
-											"value": "@item().name",
+											"value": "@pipeline().parameters.SourceFolderPath",
 											"type": "Expression"
 										}
 									}
 								}
 							]
+						},
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"cases": [
+									{
+										"value": "Case1"
+									}
+								]
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}
